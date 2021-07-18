@@ -7,6 +7,9 @@ a pure javascript code to remove all current follow requests
 
 
 
+
+
+
 You should be logged in Instagram with your account. 
 
 And should be on https://www.instagram.com/accounts/access_tool/current_follow_requests page. 
