@@ -7,11 +7,15 @@ For English Go Scroll Down
 
 
 Instagramı kullanım dilinize göre scriptin başındaki buton yazılarını güncelleyin. (Örn. türkçe kullanıyorsanız REQUESTED_TEXT = "İstek Gönderildi" gibi)
+
 Instagrama tarayıcıdan giriş yapın.
+
 https://www.instagram.com/accounts/access_tool/current_follow_requests adresine gidin.
+
 Geliştirici Araçlarına girin. (Chrome için F12'ye basın)
-Scripti Geliştirici Araçaları Konsol sekmesine yapıştırın. 
-Enter'a basın. 
+
+Scripti Geliştirici Araçaları Konsol sekmesine yapıştırın. Enter'a basın. 
+
 Konsolu izleyin.
 
 
