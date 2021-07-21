@@ -1,4 +1,3 @@
-
 const UNFOLLOW_TEXT = "Unfollow";
 const REQUESTED_TEXT = "Requested";
 const VIEWMORE_TEXT ="View More"; 
@@ -28,7 +27,6 @@ return found;
 function requested(iframe,profileName){
   
   var found = findButton(iframe,REQUESTED_TEXT,"iframe");
-
 if(found){
   found.click();
   console.log("Requested button clicked : "+profileName);
@@ -39,18 +37,30 @@ else
 }
 }
 
+function checkIfRequestedDisappeared()
+{
+ 
+}
 
 function unfollow(iframe,profileName){
   
 var unfollowButton = findButton(iframe,UNFOLLOW_TEXT,"iframe");
-
 if(unfollowButton){
   unfollowButton.click();
   console.log("Unfollow button clicked : "+profileName);
 }else{
  console.log("Unfollow button not found : "+profileName);
 }
-killIframe(profileName);
+
+var checkIfRequestedDisappearedInterval =setInterval(() => {
+  var found = findButton(iframe,REQUESTED_TEXT,"iframe");
+  if(found==undefined)
+  {
+    clearInterval(checkIfRequestedDisappearedInterval);
+    killIframe(profileName);
+  }
+}, 500);
+
 } 
 
 function killIframe(profileName){
@@ -87,22 +97,26 @@ function frameLoaded(profileName){
       clearInterval(clickButtonInterval);
       var profileNames = Array.from(document.querySelectorAll('section > div'), e => e.innerText);
       console.log("Count of Users : " + profileNames.length);
-      prepareFrame(profileNames.pop());
-      var prepareFrames = setInterval(() => {
-        if(profileNames.length==0)
-        {
-          clearInterval(prepareFrames);
-          console.log("Profile Names Empty");
-        }
-        console.log(profileNames.length + " Remaining Users");
 
-        
-        var profileName = profileNames.pop();
-        console.log("Preparing For : " + profileName);
-        prepareFrame(profileName);
-      }, 5000);
-      
-      
+      (function loop() {
+        var rand = Math.round(Math.random() * (5000)) + 25000;
+        setTimeout(function() {
+          
+          console.log(profileNames.length + " Remaining Users");
+  
+          
+          var profileName = profileNames.pop();
+          console.log("Preparing For : " + profileName);
+          prepareFrame(profileName);  
+          if(profileNames.length==0)
+          {
+            console.log("Profile Names Empty");
+          }else{
+            loop();
+          }
+          
+        }, rand);
+      }());
     }
   }, 500); 
 }
